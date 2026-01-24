@@ -1,0 +1,279 @@
+openapi: "3.0.3"
+info:
+  title: "User Service REST API"
+  version: "@project.version@"
+security:
+  - ApiKeyAuth: [ ]
+paths:
+  /api/v1/register:
+    post:
+      summary: Register a new user
+      tags:
+        - register
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+          "application/json; utf-8":
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+          "application/json; charset=utf-8":
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: Successfully registered a new user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        '400':
+          description: Bad Request (Invalid Query Parameters)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server Error (Failed to fetch logs)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/login:
+    post:
+      summary: Login user and retrieve token
+      tags:
+        - login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          "application/json; utf-8":
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          "application/json; charset=utf-8":
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Bad Request (Invalid Query Parameters)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server Error (Failed to fetch logs)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/refresh:
+    post:
+      summary: Endpoint to refresh user tokens
+      tags:
+        - refresh
+      operationId: refresh
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+          "application/json; utf-8":
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+          "application/json; charset=utf-8":
+            schema:
+              $ref: '#/components/schemas/RefreshRequest'
+      responses:
+        '200':
+          description: Successfully refreshed token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Bad Request (Invalid Query Parameters)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server Error (Failed to fetch logs)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/ping:
+    get:
+      summary: Protected ping endpoint
+      tags:
+        - ping
+      operationId: ping
+      security:
+        - ApiKeyAuth: [ ]
+        - UserServiceToken: [ ]
+      responses:
+        '200':
+          description: Successfully pinged endpoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+        '400':
+          description: Bad Request (Invalid Query Parameters)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server Error (Failed to fetch logs)
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+    RegisterResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+        username:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    LoginRequest:
+      allOf:
+        - $ref: '#/components/schemas/RegisterRequest'
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        refreshToken:
+          type: string
+        validUntil:
+          type: string
+          format: date-time
+      required:
+        - token
+        - validUntil
+    RefreshRequest:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+    PingResponse:
+      type: object
+      properties:
+        text:
+          type: string
+        username:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: the error code
+        message:
+          type: string
+          description: the errors message
+    Id:
+      description: 'ID'
+      type: string
+      format: uuid
+  parameters:
+    RegisterRequest:
+      name: register-request
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/RegisterRequest'
+    LoginRequest:
+      name: login-request
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/LoginRequest'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+    UserServiceToken:
+      description: 'Must contain an encrypted User Service Token.'
+      type: http
+      scheme: bearer
