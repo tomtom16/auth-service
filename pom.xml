@@ -111,4 +111,12 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/tomtom16/auth-service</url>
+		</repository>
+	</distributionManagement>
+
 </project>
