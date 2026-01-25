@@ -43,4 +43,6 @@ jobs:
 
     - name: Deploy to Github Packages
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
       run: mvn deploy -DskipTests
