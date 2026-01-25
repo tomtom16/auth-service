@@ -18,7 +18,7 @@ public class RefreshToken extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String tokenHash;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private UserEntity user;
 
     private LocalDateTime expiryDate;
