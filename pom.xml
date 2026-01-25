@@ -49,7 +49,7 @@
 		<swagger-annotations.version>2.2.41</swagger-annotations.version>
 		<springdoc.version>3.0.1</springdoc.version>
 		<jsonwebtoken.version>0.13.0</jsonwebtoken.version>
-		<jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+		<jackson-databind-nullable.version>0.2.8</jackson-databind-nullable.version>
 		<jackson-datatype-jsr310.version>2.21.0</jackson-datatype-jsr310.version>
 	</properties>
 
