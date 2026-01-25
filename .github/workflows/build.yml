@@ -39,7 +39,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: jar-artifact
-        path: target/*.jar
+        path: user-service/target/*.jar,api-service/target/*.jar
 
     - name: Deploy to Github Packages
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' }}
