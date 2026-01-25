@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "maven" # Der verwendete Paketmanager
+    directory: "/"             # Verzeichnis mit der pom.xml
+    schedule:
+      interval: "daily"       # Wie häufig nach Updates gesucht wird
+    open-pull-requests-limit: 5 # Maximal 5 offene PRs gleichzeitig
+    groups:
+      spring-dependencies:     # Gruppiert alle Spring-Abhängigkeiten
+        patterns:
+          - "org.springframework.*"
+          - "org.springframework.boot.*"
