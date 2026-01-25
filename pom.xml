@@ -13,6 +13,21 @@
 	<name>auth-parent</name>
 	<description>Authentication Application Parent</description>
 
+	<url>https://github.com/tomtom16/auth-service</url>
+	<developers>
+		<developer>
+			<id>tomtom16</id>
+			<name>Thomas Rotter</name>
+			<email>thomas.rotter.32@gmail.com</email>
+		</developer>
+	</developers>
+	<scm>
+		<url>https://github.com/tomtom16/auth-service</url>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/tomtom16/auth-service/issues</url>
+	</issueManagement>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
