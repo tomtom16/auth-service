@@ -50,7 +50,7 @@
 		<springdoc.version>3.0.1</springdoc.version>
 		<jsonwebtoken.version>0.13.0</jsonwebtoken.version>
 		<jackson-databind-nullable.version>0.2.9</jackson-databind-nullable.version>
-		<jackson-datatype-jsr310.version>2.21.0</jackson-datatype-jsr310.version>
+		<jackson-datatype-jsr310.version>2.21.1</jackson-datatype-jsr310.version>
 	</properties>
 
 	<dependencies>
