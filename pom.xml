@@ -46,7 +46,7 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.compiler.source>21</maven.compiler.source>
 		<openapi-generator.version>7.19.0</openapi-generator.version>
-		<swagger-annotations.version>2.2.42</swagger-annotations.version>
+		<swagger-annotations.version>2.2.43</swagger-annotations.version>
 		<springdoc.version>3.0.1</springdoc.version>
 		<jsonwebtoken.version>0.13.0</jsonwebtoken.version>
 		<jackson-databind-nullable.version>0.2.9</jackson-databind-nullable.version>
